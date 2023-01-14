@@ -1,13 +1,10 @@
-package net.goldorion.cct.config;
-
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+package net.goldorion.cct.customtabs;
 
 import java.util.List;
 
 public class CustomCreativeTab {
 
-    public String registry_name;
+    public transient String registry_name;
     public String icon;
     public boolean enable_search_bar;
     public List<String> items;

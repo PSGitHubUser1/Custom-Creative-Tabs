@@ -1,13 +1,8 @@
 package net.goldorion.cct;
 
-import com.mojang.brigadier.arguments.BoolArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.logging.LogUtils;
-import net.goldorion.cct.config.CCTManager;
-import net.goldorion.cct.config.CustomCreativeTab;
-import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.MessageArgument;
-import net.minecraft.commands.arguments.item.ItemArgument;
+import net.goldorion.cct.customtabs.CCTManager;
+import net.goldorion.cct.customtabs.CustomCreativeTab;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -15,16 +10,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -82,33 +73,6 @@ public class CCTMod {
                 tab[0] = v;
         });
         return tab[0];
-    }
-
-    @Mod.EventBusSubscriber
-    public static class RegisterCommand {
-        @SubscribeEvent
-        public static void registerCommand(RegisterCommandsEvent event) {
-            event.getDispatcher().register(Commands.literal("cct")
-                    .requires(s -> s.hasPermission(4))
-                    .then(Commands.argument("registryName", StringArgumentType.word())
-                            .then(Commands.argument("icon", ItemArgument.item(event.getBuildContext()))
-                                    .then(Commands.argument("enableSearchBar", BoolArgumentType.bool())
-                                            .then(Commands.argument("items", MessageArgument.message()).executes(context -> {
-                                                CustomCreativeTab tab = new CustomCreativeTab(StringArgumentType.getString(context, "registryName"),
-                                                        ForgeRegistries.ITEMS.getResourceKey(ItemArgument.getItem(context, "icon").getItem()).get().location().toString(),
-                                                        BoolArgumentType.getBool(context, "enableSearchBar"),
-                                                        Arrays.stream(MessageArgument.getMessage(context, "items").getString().split(" ")).toList());
-
-                                                if (CCTManager.generateTabFile(tab)) {
-                                                    context.getSource().sendSystemMessage(Component.translatable("command.cct.generate_file.success", tab.registry_name,
-                                                            new File(CCTManager.FOLDER, tab.registry_name + ".json").getPath()));
-                                                    return 1;
-                                                } else {
-                                                    context.getSource().sendSystemMessage(Component.translatable("command.cct.generate_file.fail", tab.registry_name));
-                                                    return 0;
-                                                }
-                                            }))))));
-        }
     }
 
 }

@@ -1,4 +1,4 @@
-package net.goldorion.cct.config;
+package net.goldorion.cct.customtabs;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +27,7 @@ public class CCTManager {
             Arrays.stream(Objects.requireNonNull(FOLDER.listFiles())).filter(f -> f.getName().endsWith(".json")).forEach(file -> {
                 try {
                     CustomCreativeTab tab = gson.fromJson(FileUtils.readFileToString(file, StandardCharsets.UTF_8), CustomCreativeTab.class);
+                    tab.registry_name = file.getName().replace(".json", "");
 
                     TABS.add(tab);
                 } catch (IOException e) {
