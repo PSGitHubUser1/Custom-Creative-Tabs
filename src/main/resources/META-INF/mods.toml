@@ -1,0 +1,27 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "[44,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+
+license = "MIT License"
+[[mods]] #mandatory
+# The modid of the mod
+modId = "cct" #mandatory
+version = "1.19.3-0.1-beta" #mandatory
+displayName = "Custom Creative Tabs" #mandatory
+authors = "Goldorion" #optional
+description = '''
+Add your own creative tabs to the game with a simple JSON config file!
+'''
+
+[[dependencies.cct]] #optional
+modId = "forge" #mandatory
+mandatory = true #mandatory
+versionRange = "[44,)" #mandatory
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.cct]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.3,1.20)"
+ordering = "NONE"
+side = "BOTH"

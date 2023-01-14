@@ -1,0 +1,4 @@
+{
+  "command.cct.generate_file.success": "%s has been successfully created at %s",
+  "command.cct.generate_file.fail":  "%s could not be generated."
+}
