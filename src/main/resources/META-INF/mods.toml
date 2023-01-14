@@ -5,7 +5,7 @@ license = "MIT License"
 [[mods]] #mandatory
 # The modid of the mod
 modId = "cct" #mandatory
-version = "1.19.3-1.0" #mandatory
+version = "${file.jarVersion}" #mandatory
 displayName = "Custom Creative Tabs" #mandatory
 authors = "Goldorion" #optional
 description = '''
