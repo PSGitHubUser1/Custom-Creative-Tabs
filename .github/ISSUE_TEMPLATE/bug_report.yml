@@ -28,7 +28,6 @@ body:
      - Windows
      - macOS
      - Linux
-     - Other (Tell us at the Specifications part)
    validations:
      required: true
  - type: textarea
