@@ -26,6 +26,7 @@ body:
     description: Which operating system do you use?
     options:
      - Windows
+     - macOS
      - Linux
      - Other (Tell us at the Specifications part)
    validations:
@@ -39,19 +40,6 @@ body:
       
    validations:
      required: true
- - type: textarea
-   attributes:
-    label: Example workspace
-    description: |
-      If the bug is related to the workspace, always provide a minimal reproducible example workspace, export it to a shareable ZIP file, and attach it to the ticket.
-      
-      Keep in mind your workspace of the project is not minimal reproducible example. Make a workspace only with elements crucial for the bug.
-      
-      Drag the file into this area.
-    placeholder: | 
-      Insert here
-   validations:
-    required: false
  - type: textarea
    attributes:
     label: Logs
